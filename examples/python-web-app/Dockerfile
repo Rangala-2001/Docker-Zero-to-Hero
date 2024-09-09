@@ -1,17 +1,19 @@
-# Use the official Python image as a parent image
-FROM python:3
+# Use the official Ubuntu image as the base image
+FROM ubuntu:latest
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file and install Python packages
+# Copy the requirements file and application files
 COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the 'devops' directory into the container
 COPY devops /app/devops
 
-# Set the working directory to the location where manage.py is
+# Install Python and pip, then install dependencies
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    pip3 install -r requirements.txt
+
+# Set the working directory to where manage.py is located
 WORKDIR /app/devops
 
 # Expose port 8000 for the Django application
@@ -20,6 +22,7 @@ EXPOSE 8000
 # Define the default command to run the Django application
 ENTRYPOINT ["python3"]
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+
 
 
 
