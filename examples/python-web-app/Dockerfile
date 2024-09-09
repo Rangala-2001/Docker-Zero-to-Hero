@@ -1,3 +1,4 @@
+# Use the official Ubuntu image as a base
 FROM ubuntu:latest
 
 # Set the working directory inside the container
