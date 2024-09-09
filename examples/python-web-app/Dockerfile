@@ -8,8 +8,8 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application files into the container
-COPY . /app/devops
+# Copy the 'devops' directory into the container
+COPY devops /app/devops
 
 # Set the working directory to the location where manage.py is
 WORKDIR /app/devops
@@ -20,6 +20,7 @@ EXPOSE 8000
 # Define the default command to run the Django application
 ENTRYPOINT ["python3"]
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+
 
 
 
