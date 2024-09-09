@@ -9,7 +9,7 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application files into the container
-COPY devops /app/
+COPY . /app/devops
 
 # Set the working directory to the location where manage.py is
 WORKDIR /app/devops
